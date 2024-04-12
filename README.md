@@ -1,7 +1,7 @@
 <!--
  * @Description: WASSUP
  * @Author: LDL <1923609016@qq.com>
- * @LastEditTime: 2024-04-12 22:49:26
+ * @LastEditTime: 2024-04-12 22:52:34
  * @Date: 2024-04-10 20:30:48
  * @FilePath: \Online_VScode\README.md
 -->
@@ -34,6 +34,7 @@
   ```
 - 后面跟着 -csv 的脚本 都是通过生成的 .csv 文件来创建服务
 - 没有跟的脚本都是独立的 可以独立创建某个服务 具体参数看脚本内
+- 测试时记得修改 dns 指向宿主机，关代理
 
 
 
