@@ -39,6 +39,6 @@ do
   name=${values[0]}
   password=${values[3]}
   
-  ./create-editor.sh -name $name -pass $password
+  ./create_editor.sh -name $name -pass $password
 
 done < "$csv_file"

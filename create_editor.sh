@@ -2,7 +2,7 @@
 ###
  # @Description: WASSUP
  # @Author: LDL <1923609016@qq.com>
- # @LastEditTime: 2024-04-12 22:16:27
+ # @LastEditTime: 2024-04-14 19:11:58
  # @Date: 2024-04-11 20:06:06
  # @FilePath: \Online_VScode\create-editor.sh
 ### 
@@ -33,6 +33,6 @@ fi
             -v "/editor/players/$name/project:/home/coder/project" \
             -u "$(id -u):$(id -g)" \
             -e "PASSWORD"=$password \
-            codercom/code-server:latest
+            codercom/code-server:4.23.0-39
   echo "------------end create $name's editor--------------"
   echo ""

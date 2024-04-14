@@ -19,7 +19,7 @@
 - 创建一个比赛
   csv 会有选手的信息，运行完这个脚本会输出
     ```sh
-    ./create-game.sh -num 10 -prefix player -csv players_info -ip 124.222.48.27
+    ./create_game.sh -num 10 -prefix player -csv players_info -ip 124.222.48.27
     # num 人数 必填
     # prefix 用户名前缀
     # csv 输出 csv 文件名称 不需要带 .csv 后缀
@@ -28,7 +28,7 @@
 - 创建完比赛后能继续添加选手
   这个脚本添加的选手不会加到 csv 中，只有环境，运行完这个脚本也会输出选手信息
   ```sh
-    ./create-single.sh -name test -ip
+    ./create_single.sh -name test -ip
     # name 用户名 必填
     # ip 宿主机 IP
   ```

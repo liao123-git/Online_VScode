@@ -2,9 +2,9 @@
 ###
  # @Description: WASSUP
  # @Author: LDL <1923609016@qq.com>
- # @LastEditTime: 2024-04-12 21:38:08
+ # @LastEditTime: 2024-04-14 22:20:37
  # @Date: 2024-04-11 16:10:20
- # @FilePath: \Online_VScode\create-game.sh
+ # @FilePath: \Online_VScode\create_game.sh
 ### 
 
 # 设置默认参数
@@ -31,13 +31,14 @@ if [ "$num_of_people" -eq 0 ]; then
   exit 1
 fi
 
-./clear.sh
+./create_file.sh
+./clear_csv -csv $csv_file
 
-./create-user-csv.sh -num $num_of_people -prefix $prefix -csv $csv_file
-./create-xampp-csv.sh -csv $csv_file
-./create-editor-csv.sh -csv $csv_file
-./create-nginx-csv.sh -csv $csv_file
-./create-dns-csv.sh -csv $csv_file -ip $ip
-# ./install-extension.sh -csv $csv_file -v normal
+./create_user_csv.sh -num $num_of_people -prefix $prefix -csv $csv_file
+./create_xampp_csv.sh -csv $csv_file
+./create_editor_csv.sh -csv $csv_file
+./create_nginx_csv.sh -csv $csv_file
+./create_dns_csv.sh -csv $csv_file -ip $ip
+./install_extension_csv.sh -csv $csv_file -v normal
 
-cat /editor/$csv_file
+cat $csv_file

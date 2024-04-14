@@ -1,19 +1,20 @@
-#!/bin/bash
+# /usr/sh
 ###
  # @Description: WASSUP
  # @Author: LDL <1923609016@qq.com>
- # @LastEditTime: 2024-04-12 11:07:20
- # @Date: 2024-04-11 20:06:06
- # @FilePath: \Online_VScode\create-xampps.sh
+ # @LastEditTime: 2024-04-14 19:24:46
+ # @Date: 2024-04-12 10:06:34
+ # @FilePath: \Online_VScode\create_dns_csv.sh
 ### 
-
 # 指定 CSV 文件路径
 csv_file="output.csv"
+ip="124.222.128.49"
 
 # 解析命令行参数
 while [[ "$#" -gt 0 ]]; do
   case $1 in
     -csv) csv_file="$2"; shift ;;
+    -ip) ip="$2"; shift ;;
     *) echo "Unknown parameter passed: $1"; exit 1 ;;
   esac
   shift
@@ -25,8 +26,12 @@ if [ ! -f "$csv_file" ]; then
   exit 1
 fi
 
-# 逐行读取 CSV 文件内容并输出 Name 和 Email
-while IFS= read -r line
+sudo systemctl restart systemd-networkd
+
+sudo rm -rf /editor/coredns
+sudo mkdir -p /editor/coredns/players
+
+while IFS= read -r line <&3
 do
   # 跳过标题行
   if [[ $line == "Name,Domain,Editor,Password" ]]; then
@@ -37,6 +42,13 @@ do
   IFS=',' read -r -a values <<< "$line"
 
   name=${values[0]}
-  ./create-xampp.sh -name $name
+  domain=${values[1]}
+  editor=${values[2]}
 
-done < "$csv_file"
+    # 创建一个配置文件
+  ./create_dns.sh -name $name -domain $domain -editor $editor -ip $ip
+
+done 3< "$csv_file"
+
+# 重载所有配置
+./reset_dns.sh -path /editor/coredns/players

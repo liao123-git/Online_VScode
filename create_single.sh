@@ -2,9 +2,9 @@
 ###
  # @Description: WASSUP
  # @Author: LDL <1923609016@qq.com>
- # @LastEditTime: 2024-04-12 22:22:16
+ # @LastEditTime: 2024-04-14 19:26:10
  # @Date: 2024-04-12 21:37:10
- # @FilePath: \Online_VScode\create-single.sh
+ # @FilePath: \Online_VScode\create_single.sh
 ### 
 
 # 设置默认参数
@@ -31,11 +31,11 @@ password=$(cat /dev/urandom | tr -dc 'A-KM-NP-Za-hj-z1-9&%' | fold -w 8 | head -
 domain="${name}.qgweb.com"
 editor="editor.${name}.qgweb.com"
 
-./create-xampp.sh -name $name
-./create-editor.sh -name $name -pass $password
-./create-nginx.sh -name $name -domain $domain -editor $editor
-./create-dns.sh -name $name -domain $domain -editor $editor -ip $ip
-./reset-dns.sh -path /editor/coredns/players
-./install-extension.sh -name $name
+./create_xampp.sh -name $name
+./create_editor.sh -name $name -pass $password
+./create_nginx.sh -name $name -domain $domain -editor $editor
+./create_dns.sh -name $name -domain $domain -editor $editor -ip $ip
+./reset_dns.sh -path /editor/coredns/players
+./install_extension.sh -name $name
 
 echo "$name,$domain,$editor,$password"

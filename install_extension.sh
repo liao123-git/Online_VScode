@@ -2,9 +2,9 @@
 ###
  # @Description: WASSUP
  # @Author: LDL <1923609016@qq.com>
- # @LastEditTime: 2024-04-12 22:06:33
+ # @LastEditTime: 2024-04-14 19:24:17
  # @Date: 2024-04-11 20:06:06
- # @FilePath: \Online_VScode\install-extension.sh
+ # @FilePath: \Online_VScode\install_extension.sh
 ### 
 
 # 指定 CSV 文件路径
@@ -35,8 +35,8 @@ echo "------------install $name's extension--------------"
     fi
 
     
-    sudo docker exec -i ${name}_editor bash -c 'cat > /root/.local/share/code-server/Machine/settings.json' < /editor/settings.json
-    sudo docker exec -i ${name}_editor bash -c 'cat > /root/.local/share/code-server/User/settings.json' < /editor/settings.json
+    sudo docker exec -i ${name}_editor bash -c 'cat > /root/.local/share/code-server/Machine/settings.json' < ./settings.json
+    sudo docker exec -i ${name}_editor bash -c 'cat > /root/.local/share/code-server/User/settings.json' < ./settings.json
     sudo docker restart ${name}_editor
 
 echo "------------end install $name's extension--------------"

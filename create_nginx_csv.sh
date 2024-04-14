@@ -2,7 +2,7 @@
 ###
  # @Description: WASSUP
  # @Author: LDL <1923609016@qq.com>
- # @LastEditTime: 2024-04-12 21:56:01
+ # @LastEditTime: 2024-04-14 18:25:20
  # @Date: 2024-04-11 20:06:06
  # @FilePath: \Online_VScode\create-nginx-csv.sh
 ### 
@@ -25,9 +25,6 @@ if [ ! -f "$csv_file" ]; then
   exit 1
 fi
 
-sudo docker rm -f nginx
-sudo docker run -d --name nginx -p 80:80 --net game nginx
-
 while IFS= read -r line <&3
 do
   # 跳过标题行
@@ -42,6 +39,6 @@ do
   domain=${values[1]}
   editor=${values[2]}
 
-  ./create-nginx.sh -name $name -domain $domain -editor $editor
+  ./create_nginx.sh -name $name -domain $domain -editor $editor
 
 done 3< "$csv_file"

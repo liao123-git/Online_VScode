@@ -35,8 +35,8 @@ sudo mkdir -p /editor/players/$name/.config
 sudo mkdir -p /editor/players/$name/project 
 sudo chmod -R 777 /editor/players/$name/*
 
-./create-xampp.sh -name $name
-./create-editor.sh -name $name -pass $pasword
+./create_xampp.sh -name $name
+./create_editor.sh -name $name -pass $pasword
 
 echo "$name,$domain,$editor,$password" >> "$name.info"
 
