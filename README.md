@@ -1,7 +1,7 @@
 <!--
  * @Description: WASSUP
  * @Author: LDL <1923609016@qq.com>
- * @LastEditTime: 2024-04-12 22:52:34
+ * @LastEditTime: 2024-04-17 09:55:33
  * @Date: 2024-04-10 20:30:48
  * @FilePath: \Online_VScode\README.md
 -->
@@ -9,28 +9,45 @@
 
 ## 运行
 - 宿主机`ubuntu 22.0` 开放防火墙 80tcp 53udp 端口。
-- 复制所有文件到目录下。
+- 创建脚本存放目录，复制所有文件到目录下。
 - 初始化
     ```sh
-    chmod -R * 777
+        # 你脚本存放的目录
+    chmod -R 777 /my_shell
     ./init.sh
+        # 如果镜像安装报错 重新执行
     ```
-- 关闭宿主机 dns 服务，修改 dns 指向 127.0.0.1:53
+- 初始化
+    ```sh
+        # 你脚本存放的目录
+    ./set_ip.sh -ip 192.168.7.215 -interface ensxx -gateway 192.168.7.254
+        # num 人数 必填
+        # ip 宿主机 IP 必填
+        # interface 网卡名称 必填
+        # gateway 网关 必填
+    ```
 - 创建一个比赛
   csv 会有选手的信息，运行完这个脚本会输出
     ```sh
-    ./create_game.sh -num 10 -prefix player -csv players_info -ip 124.222.48.27
-    # num 人数 必填
-    # prefix 用户名前缀
-    # csv 输出 csv 文件名称 不需要带 .csv 后缀
-    # ip 宿主机 IP
+    ./create_game.sh -num 10 -prefix player -csv players_info -template default
+        # num 人数 必填
+        # prefix 用户名前缀
+        # csv 输出 csv 文件名称 不需要带 .csv 后缀 默认 output
+        # template 文件模板 默认空
     ```
 - 创建完比赛后能继续添加选手
-  这个脚本添加的选手不会加到 csv 中，只有环境，运行完这个脚本也会输出选手信息
+  这个脚本添加的选手不会加到 csv 中，会在脚本目录下输出一个`$name.csv`
   ```sh
-    ./create_single.sh -name test -ip
-    # name 用户名 必填
-    # ip 宿主机 IP
+    ./create_single.sh -name test -template default
+        # name 用户名 必填
+        # template 文件模板 默认空
+  ```
+  - 保存项目成模板
+  保存当前已有选手项目成模板，保存到`/editor/template/$name`
+  ```sh
+    ./save_project.sh -name test -template test
+        # name 用户名 必填
+        # template 模板名 必填
   ```
 - 后面跟着 -csv 的脚本 都是通过生成的 .csv 文件来创建服务
 - 没有跟的脚本都是独立的 可以独立创建某个服务 具体参数看脚本内
