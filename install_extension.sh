@@ -2,7 +2,7 @@
 ###
  # @Description: WASSUP
  # @Author: LDL <1923609016@qq.com>
- # @LastEditTime: 2024-04-16 14:33:32
+ # @LastEditTime: 2024-04-17 13:53:39
  # @Date: 2024-04-11 20:06:06
  # @FilePath: \Online_VScode\install_extension.sh
 ### 
@@ -31,9 +31,17 @@ echo ""
 echo "------------install $name's extension--------------"
 
     if [ $version == "normal" ]; then
-        sudo docker exec ${name}_editor /usr/bin/code-server --install-extension ecmel.vscode-html-css  /usr/bin/code-server --install-extension kisstkondoros.vscode-gutter-preview /usr/bin/code-server --install-extension tuxtina.json2yaml /usr/bin/code-server --install-extension christian-kohler.path-intellisense  /usr/bin/code-server --install-extension esbenp.prettier-vscode
+        sudo docker exec ${name}_editor /usr/bin/code-server --install-extension ecmel.vscode-html-css \
+        /usr/bin/code-server --install-extension kisstkondoros.vscode-gutter-preview \
+        /usr/bin/code-server --install-extension tuxtina.json2yaml \
+        /usr/bin/code-server --install-extension christian-kohler.path-intellisense  \
+        /usr/bin/code-server --install-extension esbenp.prettier-vscode\
+        /usr/bin/code-server --install-extension kisstkondoros.vscode-gutter-preview \
+        /usr/bin/code-server --install-extension tuxtina.json2yaml \
+        /usr/bin/code-server --install-extension christian-kohler.path-intellisense \
+        /usr/bin/code-server --install-extension xabikos.JavaScriptSnippets \
+        /usr/bin/code-server --install-extension streetsidesoftware.code-spell-checker
     fi
-
     
     sudo docker exec -i ${name}_editor bash -c 'cat > /root/.local/share/code-server/Machine/settings.json' < ./settings.json
     sudo docker exec -i ${name}_editor bash -c 'cat > /root/.local/share/code-server/User/settings.json' < ./settings.json
