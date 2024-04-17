@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+
+        .pageLeft {
+            flex-basis: 672px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            font-size: 1rem;
+        }
+
+        .pageRight {
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: #292929;
+            height: 100%;
+            flex: 1;
+        }
+
+        .sidebar {
+            border-right: 1px solid #eee;
+            min-width: 55px;
+            flex-basis: 55px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .content {
+            flex: 1;
+            overflow-y: scroll;
+            padding: 20px 20px 40px;
+        }
+
+        .content h1,
+        .content h2 {
+            border-bottom: 1px solid #eaecef;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: .3em;
+            margin-top: 24px;
+        }
+
+        .content p {
+            font-size: .9em;
+        }
+
+        .content h2 {
+            font-size: 1.3em;
+        }
+
+        .content>:first-child {
+            margin: 0;
+        }
+
+        .content ul,
+        .content ol {
+            margin-left: 35px;
+            font-size: 14px;
+        }
+
+        .content li {
+            margin: 10px 0;
+        }
+
+        .pink {
+            word-wrap: break-word;
+            color: #e83e8c;
+            font-size: 87.5%;
+        }
+
+        .icon_font {
+            margin-top: 5px;
+            font-size: 11px;
+        }
+
+        .icon {
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 15px;
+        }
+
+        #shrink {
+            align-items: center;
+            background: #dedede;
+            border-radius: 15px 0 0 15px;
+            cursor: pointer;
+            display: flex;
+            height: 110px;
+            justify-content: center;
+            position: absolute;
+            left: -14px;
+            top: calc(50% - 55px);
+            width: 14px;
+            z-index: 1;
+        }
+
+        .main {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .header {
+            height: 55px;
+            display: flex;
+            padding: 0 7px;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+
+        .gray {
+            color: gray;
+            font-weight: normal;
+        }
+
+        .mg-25 {
+            margin: 0 5px;
+        }
+
+        .code {
+            background: #23241f;
+            display: block;
+            overflow-x: auto;
+            padding: .5em;
+            color: white;
+            font-family: none;
+        }
+
+        code {
+            word-wrap: break-word;
+        }
+
+        .hide_wd {
+            flex-basis: 55px !important;
+        }
+
+        .transform {
+            transform: rotate(180deg);
+        }
+
+        #middle {
+            z-index: 2;
+            width: 5px;
+            cursor: col-resize;
+            transform: translateX(50%);
+        }
+
+        .drag {
+            user-select: none;
+        }
+
+        .btn {
+            width: 100px;
+            height: 35px;
+            background: rgb(0, 89, 255);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .form__item {
+            display: flex;
+            color: grey;
+            align-items: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .form__item label {
+            width: 120px;
+        }
+
+        .form__item input,
+        .form__item select {
+            padding: 10px 15px;
+            background: rgb(0, 0, 0, .05);
+            border: none;
+            flex: 1;
+        }
+
+        .form {
+            width: 500px;
+            padding: 30px;
+            background: white;
+            text-align: center;
+        }
+
+        #loading {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        iframe.focus {
+            pointer-events: none;
+        }
+
+        #middle.focus {
+            background: #1296db;
+        }
+
+        .main img {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+
+        .hide {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="pageLeft">
+            <div class="header">
+                <img src="./imgs/logo.JPG" alt="logo" width="50" style="margin-right: 10px;">
+                <h3 class="gray school">杭州轻工技师学院-网站技术兴趣小组-四月份竞赛</h3>
+            </div>
+
+            <div class="main">
+                <div class="sidebar">
+                    <div class="subject">
+                        <div class="icon list">
+                            <svg t="1713241512657" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="5977" width="25" height="25">
+                                <path
+                                    d="M860.8 19.2H179.2C124.8 19.2 80 64 80 118.4v774.4c0 54.4 44.8 99.2 99.2 99.2h563.2l214.4-236.8V118.4C960 64 915.2 19.2 860.8 19.2zM179.2 928c-19.2 0-32-16-32-32V118.4c0-19.2 16-32 32-32h681.6c19.2 0 32 16 32 32v611.2l-3.2 3.2h-160v176l-16 19.2H179.2z"
+                                    p-id="5978" fill="#1296db"></path>
+                                <path
+                                    d="M243.2 281.6h486.4c19.2 0 32-16 32-32 0-19.2-16-32-32-32H243.2c-19.2 0-32 16-32 32 0 19.2 16 32 32 32zM243.2 476.8h486.4c19.2 0 32-16 32-32 0-19.2-16-32-32-32H243.2c-19.2 0-32 16-32 32 0 19.2 16 32 32 32zM531.2 608h-288c-19.2 0-32 16-32 32 0 19.2 16 32 32 32h288c19.2 0 32-16 32-32 3.2-19.2-12.8-32-32-32z"
+                                    p-id="5979" fill="#1296db"></path>
+                            </svg>
+                            <svg t="1713241512657" class="icon hide" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="5977" width="25" height="25">
+                                <path
+                                    d="M860.8 19.2H179.2C124.8 19.2 80 64 80 118.4v774.4c0 54.4 44.8 99.2 99.2 99.2h563.2l214.4-236.8V118.4C960 64 915.2 19.2 860.8 19.2zM179.2 928c-19.2 0-32-16-32-32V118.4c0-19.2 16-32 32-32h681.6c19.2 0 32 16 32 32v611.2l-3.2 3.2h-160v176l-16 19.2H179.2z"
+                                    p-id="5978" fill="#8a8a8a"></path>
+                                <path
+                                    d="M243.2 281.6h486.4c19.2 0 32-16 32-32 0-19.2-16-32-32-32H243.2c-19.2 0-32 16-32 32 0 19.2 16 32 32 32zM243.2 476.8h486.4c19.2 0 32-16 32-32 0-19.2-16-32-32-32H243.2c-19.2 0-32 16-32 32 0 19.2 16 32 32 32zM531.2 608h-288c-19.2 0-32 16-32 32 0 19.2 16 32 32 32h288c19.2 0 32-16 32-32 3.2-19.2-12.8-32-32-32z"
+                                    p-id="5979" fill="#8a8a8a"></path>
+                            </svg>
+                            <span class="icon_font">题目一</span>
+                        </div>
+
+                        <div class="icon list">
+                            <svg t="1713241512657" class="icon hide" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="5977" width="25" height="25">
+                                <path
+                                    d="M860.8 19.2H179.2C124.8 19.2 80 64 80 118.4v774.4c0 54.4 44.8 99.2 99.2 99.2h563.2l214.4-236.8V118.4C960 64 915.2 19.2 860.8 19.2zM179.2 928c-19.2 0-32-16-32-32V118.4c0-19.2 16-32 32-32h681.6c19.2 0 32 16 32 32v611.2l-3.2 3.2h-160v176l-16 19.2H179.2z"
+                                    p-id="5978" fill="#1296db"></path>
+                                <path
+                                    d="M243.2 281.6h486.4c19.2 0 32-16 32-32 0-19.2-16-32-32-32H243.2c-19.2 0-32 16-32 32 0 19.2 16 32 32 32zM243.2 476.8h486.4c19.2 0 32-16 32-32 0-19.2-16-32-32-32H243.2c-19.2 0-32 16-32 32 0 19.2 16 32 32 32zM531.2 608h-288c-19.2 0-32 16-32 32 0 19.2 16 32 32 32h288c19.2 0 32-16 32-32 3.2-19.2-12.8-32-32-32z"
+                                    p-id="5979" fill="#1296db"></path>
+                            </svg>
+                            <svg t="1713241512657" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="5977" width="25" height="25">
+                                <path
+                                    d="M860.8 19.2H179.2C124.8 19.2 80 64 80 118.4v774.4c0 54.4 44.8 99.2 99.2 99.2h563.2l214.4-236.8V118.4C960 64 915.2 19.2 860.8 19.2zM179.2 928c-19.2 0-32-16-32-32V118.4c0-19.2 16-32 32-32h681.6c19.2 0 32 16 32 32v611.2l-3.2 3.2h-160v176l-16 19.2H179.2z"
+                                    p-id="5978" fill="#8a8a8a"></path>
+                                <path
+                                    d="M243.2 281.6h486.4c19.2 0 32-16 32-32 0-19.2-16-32-32-32H243.2c-19.2 0-32 16-32 32 0 19.2 16 32 32 32zM243.2 476.8h486.4c19.2 0 32-16 32-32 0-19.2-16-32-32-32H243.2c-19.2 0-32 16-32 32 0 19.2 16 32 32 32zM531.2 608h-288c-19.2 0-32 16-32 32 0 19.2 16 32 32 32h288c19.2 0 32-16 32-32 3.2-19.2-12.8-32-32-32z"
+                                    p-id="5979" fill="#8a8a8a"></path>
+                            </svg>
+                            <span class="icon_font">题目二</span>
+                        </div>
+
+                        <div class="icon list">
+                            <svg t="1713241512657" class="icon hide" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="5977" width="25" height="25">
+                                <path
+                                    d="M860.8 19.2H179.2C124.8 19.2 80 64 80 118.4v774.4c0 54.4 44.8 99.2 99.2 99.2h563.2l214.4-236.8V118.4C960 64 915.2 19.2 860.8 19.2zM179.2 928c-19.2 0-32-16-32-32V118.4c0-19.2 16-32 32-32h681.6c19.2 0 32 16 32 32v611.2l-3.2 3.2h-160v176l-16 19.2H179.2z"
+                                    p-id="5978" fill="#1296db"></path>
+                                <path
+                                    d="M243.2 281.6h486.4c19.2 0 32-16 32-32 0-19.2-16-32-32-32H243.2c-19.2 0-32 16-32 32 0 19.2 16 32 32 32zM243.2 476.8h486.4c19.2 0 32-16 32-32 0-19.2-16-32-32-32H243.2c-19.2 0-32 16-32 32 0 19.2 16 32 32 32zM531.2 608h-288c-19.2 0-32 16-32 32 0 19.2 16 32 32 32h288c19.2 0 32-16 32-32 3.2-19.2-12.8-32-32-32z"
+                                    p-id="5979" fill="#1296db"></path>
+                            </svg>
+                            <svg t="1713241512657" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="5977" width="25" height="25">
+                                <path
+                                    d="M860.8 19.2H179.2C124.8 19.2 80 64 80 118.4v774.4c0 54.4 44.8 99.2 99.2 99.2h563.2l214.4-236.8V118.4C960 64 915.2 19.2 860.8 19.2zM179.2 928c-19.2 0-32-16-32-32V118.4c0-19.2 16-32 32-32h681.6c19.2 0 32 16 32 32v611.2l-3.2 3.2h-160v176l-16 19.2H179.2z"
+                                    p-id="5978" fill="#8a8a8a"></path>
+                                <path
+                                    d="M243.2 281.6h486.4c19.2 0 32-16 32-32 0-19.2-16-32-32-32H243.2c-19.2 0-32 16-32 32 0 19.2 16 32 32 32zM243.2 476.8h486.4c19.2 0 32-16 32-32 0-19.2-16-32-32-32H243.2c-19.2 0-32 16-32 32 0 19.2 16 32 32 32zM531.2 608h-288c-19.2 0-32 16-32 32 0 19.2 16 32 32 32h288c19.2 0 32-16 32-32 3.2-19.2-12.8-32-32-32z"
+                                    p-id="5979" fill="#8a8a8a"></path>
+                            </svg>
+                            <span class="icon_font">题目三</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content ">
+                    <h1>题目一</h1>
+                    <h2>介绍</h2>
+                    <p>
+                        三叔在外出考古途中无意发现了一份战国帛书，帛书边缘有被明显裁剪过的痕迹，单从帛书片段，提到记录了神秘文物的地点，无奈帛书不完整，为了早日将文物带回博物馆，三叔号召当地村民闷油瓶、王胖子、潘子共同寻找剩余帛书碎片，相约一炷香后再聚。
+                    </p>
+
+                    <p>&MediumSpace;</p>
+
+                    <p>
+                        <strong>本题需要在已提供的基础项目中使用 JS 知识封装一个函数，达到收集帛书碎片的要求。</strong>
+                    </p>
+
+                    <h2>准备</h2>
+                    <p>
+                        开始答题前，需要先打开本题的项目代码文件夹（topic1），目录结构如下：
+                    </p>
+
+                    <pre>
+                            <code class="code">
+    ├── js
+    │   └── collect-puzzle.js
+    ├── css
+    │   └── style.css
+    ├── images
+    └── index.html
+                            </code>
+                        </pre>
+
+                    <p>其中: </p>
+                    <ul>
+                        <li><span class="pink">index.html</span> 是主页面。</li>
+                        <li><span class="pink">css/style.css</span> 是样式文件。</li>
+                        <li><span class="pink">images</span> 是图片文件夹。</li>
+                        <li><strong><span class="pink">js/collect-puzzle.js</span> 是需要补充代码的 js 文件。且只需修改这个 js
+                                文件，让代码成功运行。</strong>
+                        </li>
+                    </ul>
+
+                    <p>&MediumSpace;</p>
+                    <p>在浏览器中预览 <span class="pink">index.html</span> 页面，显示如下所示：</p>
+                    <p>&MediumSpace;</p>
+                    <img src="./imgs/topic1_view.png" alt="预览效果">
+
+                    <h2>目标</h2>
+                    <p>
+                        请在 <span class="pink">collect-puzzle.js</span> 文件中补全函数 <span class="pink">collectPuzzle</span>
+                        中的代码，返回包含不同帛书碎片的数组，最终拼出完整的战国帛书，需要注意：
+                    </p>
+                    <ul>
+                        <li>同一个人收集的帛书碎片可能是有重复的。</li>
+                        <li>同一组内不同的人收集的帛书碎片也可能是有重复的。</li>
+                        <li>你需要统计所有人获取的不同帛书碎片，而不是帛书碎片数量。</li>
+                    </ul>
+
+                    <p>&MediumSpace;</p>
+                    <p>例如：</p>
+                    <img src="./imgs/topic1_code.png" alt="代码预览">
+
+                    <p>&MediumSpace;</p>
+                    <p>上述仅为示例代码，判题时会随机提供数组对该函数功能进行检测，再次提示你只需修改 <span class="pink">collect-puzzle.js</span> 中的代码。</p>
+                    <p>&MediumSpace;</p>
+                    <p>在题目所提供的数据的情况下，完成后的效果如下： </p>
+                    <img src="./imgs/topic1_view2.png" alt="代码预览">
+
+                    <h2>规定</h2>
+                    <ul>
+                        <li><strong>请勿修改 <span class="pink">collect-puzzle.js</span> 文件外的任何内容。</strong></li>
+                        <li><strong>请严格按照考试步骤操作，切勿修改考试默认提供项目中的文件名称、文件夹路径、class 名、id 名、图片名等，以免造成无法判题通过。</strong></li>
+                    </ul>
+
+                    <h2>评分标准</h2>
+                    <ul>
+                        <li>满分 <strong>20</strong> 分。完全实现题目目标得满分，否则得 <strong>0</strong> 分。</li>
+                    </ul>
+                </div>
+
+                <div class="content hide">
+                    <h1>题目二</h1>
+                    <h2>介绍</h2>
+                    <p>
+                        每年新生报道时，都需要办一张饭卡，小青需要帮助学校做一个制卡界面，但是用 js 做用户输入验证不知道怎么写，快来帮助小青完成这个页面吧！
+                    </p>
+
+                    <h2>准备</h2>
+                    <p>
+                        开始答题前，需要先打开本题的项目代码文件夹（topic2），目录结构如下：
+                    </p>
+
+                    <pre>
+                        <code class="code">
+├── css
+│   ├── wish.css
+│   └── index.css
+├── images
+│   └── college.jpg
+└── index.html
+                        </code>
+                    </pre>
+
+                    <p>其他: </p>
+                    <ul>
+                        <li><span class="pink">index.html</span> 是主页面。</li>
+                        <li><span class="pink">images</span> 是图片文件夹。</li>
+                        <li><span class="pink">css</span> 是样式文件夹。</li>
+                    </ul>
+
+                    <p>&MediumSpace;</p>
+                    <p>在浏览器中预览 <span class="pink">index.html</span> 页面，显示如下所示：</p>
+                    <img src="./imgs/topic2_view.png" alt="预览效果">
+                    <h2>目标</h2>
+                    <p>
+                        请在 <span class="pink">index.html</span> 文件中补全代码，具体需求如下：
+                    </p>
+                    <ol>
+                        <li>
+                            <strong>完成表单验证</strong>
+                            <ul>
+                                <li>姓名：2-4 个字符，验证错误在对应的表单项（<span class="pink">class='form-group'</span>）添加类名 <span
+                                        class="pink">'has-error'</span>，并在下方显示报错信息（即将 <span
+                                        class="pink">id='vail_name'</span> 的元素显示）。</li>
+                                <li>学号: 1-12 位纯数字，错误即在对应的表单项（<span class="pink">class='form-group'</span>）添加类<span
+                                        class="pink">'has-error'</span>，并在下方显示报错信息（即将 <span
+                                        class="pink">id='vail_studentId'</span> 的元素显示）。</li>
+                            </ul>
+                        </li>
+                        <li>表单验证通过过后，正确显示卡片。在卡片（<span class="pink">class='info'</span>）元素下的（<span
+                                class="pink">class='item'</span>）的元素中按照顺序分别显示表单提交的内容：姓名：xxx，学号：xxx, 专业：xxx。</li>
+                    </ol>
+
+                    <p>
+                        完成后效果类似如下（字段有改动正常）：
+                    </p>
+                    <img src="./imgs/topic2_view.gif" alt="">
+
+                    <h2>规定</h2>
+                    <ul>
+                        <li><strong>请严格按照考试步骤操作，切勿修改考试默认提供项目中的文件名称、文件夹路径、class 名、id 名、图片名等，以免造成无法判题通过。</strong></li>
+                    </ul>
+
+                    <h2>评分标准</h2>
+                    <ul>
+                        <li>满分 <strong>35</strong> 分。实现表单验证得 <strong>25</strong> 分。实现表单内容输出至卡片得 <strong>10</strong>
+                            分。完全实现题目目标得满分。</li>
+                    </ul>
+                </div>
+
+                <div class="content hide">
+                    <h1>题目三</h1>
+                    <h2>介绍</h2>
+                    <p>
+                        古以算盘作为计算工具。算盘常为木制矩框，内嵌珠子数串，定位拨珠，可做加减乘除等运算。站在前人的肩膀上，后人研究出计算器，便利了大家的生活，我们不用带着笨重的计算工具出门，打开手机上的计算器就可以了。
+                    </p>
+                    <p>&MediumSpace;</p>
+                    <p>本题需要实现一个可以进行加减乘除等运算的计算器。</p>
+
+                    <h2>准备</h2>
+                    <p>
+                        开始答题前，需要先打开本题的项目代码文件夹（topic3），目录结构如下：
+                    </p>
+
+                    <pre>
+                        <code class="code">
+├── css
+│   └── style.css
+├── js
+│   └── index.js
+└── index.html
+                        </code>
+                    </pre>
+
+                    <p>其中: </p>
+                    <ul>
+                        <li><span class="pink">index.html</span> 是主页面。</li>
+                        <li><span class="pink">js/index.js</span> 是实现计算功能的 js 文件。</li>
+                        <li><span class="pink">css</span> 是样式文件夹。</li>
+                    </ul>
+
+                    <p>在浏览器中预览 <span class="pink">index.html</span>
+                        页面，点击计算器上的按钮，不能进行计算（图上的红色文字只是对计算器的功能区域进行说明，无需实现），效果如下：</p>
+                    <img src="./imgs/topic3_view.png" alt="效果预览">
+
+                    <h2>目标</h2>
+                    <p>
+                        请在 <span class="pink">index.js</span> 文件中补全代码，当鼠标点击计算器上的按钮时，能够正常进行计算。
+                    </p>
+                    <p>&MediumSpace;</p>
+                    <p>
+                        具体说明如下：
+                    </p>
+                    <ul>
+                        <li>点击按钮会在计算式子区域显示当前输入的计算式子，当点击<strong>等号（=） 后</strong>，在结果显示区域应该显示出正确的结果。</li>
+                        <li>计算器需要具有<strong>加（+）</strong>、<strong>减（-）</strong>、<strong>乘（x）</strong>、<strong>除（÷）</strong>、<strong>退格（DE）</strong>、<strong>重置（AC）</strong>、<strong>小数点（.）</strong>、括号运算这八个功能。
+                        </li>
+                        <li>计算器的计算遵循四则混合运算的法则，括号的优先级最高，其次是乘除，加减的优先级最低。</li>
+                    </ul>
+                    <p>&MediumSpace;</p>
+                    <p>
+                        要求：
+                    </p>
+                    <ul>
+                        <li>能够正确进行加、减、乘、除的混合运算。例如：<span class="pink">2×(5-3)+8÷(4-2)=8</span></li>
+                        <li>点击退格按钮（DE），可以删除计算式子的最后一位。</li>
+                        <li>点击重置按钮（AC），可以清空计算式子显示区域和结果显示区域的值。</li>
+                        <li>能够进行小数的加减乘除运算。</li>
+                    </ul>
+
+                    <h2>规定</h2>
+                    <ul>
+                        <li><strong>请勿修改除 <span class="pink">js/index.js</span> 文件以外任何文件的内容。</strong></li>
+                        <li><strong>请注意，在 <span class="pink">js/index.js</span> 文件中编写代码时，必须使用文件已经给出的 class 名、id 名、标签来进行
+                                DOM 操作。</strong></li>
+                        <li><strong>请严格按照考试步骤操作，切勿修改考试默认提供项目中的文件名称、文件夹路径、class 名、id 名、图片名等，以免造成无法判题通过。</strong></li>
+                    </ul>
+
+                    <h2>评分标准</h2>
+                    <ul>
+                        <li>满分 <strong>45</strong> 分。实现退格（DE）功能得
+                            <strong>5</strong>
+                            分。实现重置（AC）功能得
+                            <strong>5</strong>
+                            分。实现计算式子和结果显示功能得 <strong>10</strong> 分。
+                            实现计算功能得 <strong>25</strong> 分。
+                            完全实现题目目标得满分。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="middle"></div>
+        <div class="pageRight">
+            <div id="shrink" onclick="overflow()"><svg t="1713242090952" viewBox="0 0 1024 1024" version="1.1"
+                    class="arrow" xmlns="http://www.w3.org/2000/svg" p-id="8231" width="25" height="25">
+                    <path
+                        d="M750.72 60.586667c23.04 23.893333 23.04 62.677333 0 86.613333L398.592 512l352.085333 364.8c23.04 23.936 23.04 62.72 0 86.613333a57.6 57.6 0 0 1-83.584 0l-393.813333-408.106666a62.805333 62.805333 0 0 1 0-86.613334l393.813333-408.106666a57.6 57.6 0 0 1 83.584 0z"
+                        fill="#bfbfbf" p-id="8232"></path>
+                </svg></div>
+
+            <iframe id="myIframe" class="hide" name="myIframe"></iframe>
+
+            <div class="form" id="loginBox">
+                <h2>登录</h2>
+                <form id="fakeLogin">
+                    <div class="form__item">
+                        <label for="username">用户名 </label>
+                        <input type="text" id="username" name="username" required placeholder="请输入用户名" />
+                    </div>
+                    <div class="form__item">
+                        <label for="passsword">密码 </label>
+                        <input type="passsword" id="passsword" name="passsword" required placeholder="请输入密码" />
+                    </div>
+                    <button class="btn" type="submit">确定登录</button>
+                </form>
+                <form id="realLogin" action="http://editor.apriltest.qgweb.com/?folder=/home/coder/project"
+                    method="post" target="myIframe" style="display: none;">
+                    <input type="text" name="password" id="realPassword">
+                    <input type="submit">
+                </form>
+            </div>
+
+            <div id="loading" class="hide">
+                <svg width="100" height="100" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1" y="1" width="7.33" height="7.33" fill="white">
+                        <animate id="a" begin="0;b.end+0.2s" attributeName="x" dur="0.6s" values="1;4;1" />
+                        <animate begin="0;b.end+0.2s" attributeName="y" dur="0.6s" values="1;4;1" />
+                        <animate begin="0;b.end+0.2s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+                        <animate begin="0;b.end+0.2s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+                    </rect>
+                    <rect x="8.33" y="1" width="7.33" height="7.33" fill="white">
+                        <animate begin="a.begin+0.1s" attributeName="x" dur="0.6s" values="8.33;11.33;8.33" />
+                        <animate begin="a.begin+0.1s" attributeName="y" dur="0.6s" values="1;4;1" />
+                        <animate begin="a.begin+0.1s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+                        <animate begin="a.begin+0.1s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+                    </rect>
+                    <rect x="1" y="8.33" width="7.33" height="7.33" fill="white">
+                        <animate begin="a.begin+0.1s" attributeName="x" dur="0.6s" values="1;4;1" />
+                        <animate begin="a.begin+0.1s" attributeName="y" dur="0.6s" values="8.33;11.33;8.33" />
+                        <animate begin="a.begin+0.1s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+                        <animate begin="a.begin+0.1s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+                    </rect>
+                    <rect x="15.66" y="1" width="7.33" height="7.33" fill="white">
+                        <animate begin="a.begin+0.2s" attributeName="x" dur="0.6s" values="15.66;18.66;15.66" />
+                        <animate begin="a.begin+0.2s" attributeName="y" dur="0.6s" values="1;4;1" />
+                        <animate begin="a.begin+0.2s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+                        <animate begin="a.begin+0.2s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+                    </rect>
+                    <rect x="8.33" y="8.33" width="7.33" height="7.33" fill="white">
+                        <animate begin="a.begin+0.2s" attributeName="x" dur="0.6s" values="8.33;11.33;8.33" />
+                        <animate begin="a.begin+0.2s" attributeName="y" dur="0.6s" values="8.33;11.33;8.33" />
+                        <animate begin="a.begin+0.2s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+                        <animate begin="a.begin+0.2s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+                    </rect>
+                    <rect x="1" y="15.66" width="7.33" height="7.33" fill="white">
+                        <animate begin="a.begin+0.2s" attributeName="x" dur="0.6s" values="1;4;1" />
+                        <animate begin="a.begin+0.2s" attributeName="y" dur="0.6s" values="15.66;18.66;15.66" />
+                        <animate begin="a.begin+0.2s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+                        <animate begin="a.begin+0.2s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+                    </rect>
+                    <rect x="15.66" y="8.33" width="7.33" height="7.33" fill="white">
+                        <animate begin="a.begin+0.3s" attributeName="x" dur="0.6s" values="15.66;18.66;15.66" />
+                        <animate begin="a.begin+0.3s" attributeName="y" dur="0.6s" values="8.33;11.33;8.33" />
+                        <animate begin="a.begin+0.3s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+                        <animate begin="a.begin+0.3s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+                    </rect>
+                    <rect x="8.33" y="15.66" width="7.33" height="7.33" fill="white">
+                        <animate begin="a.begin+0.3s" attributeName="x" dur="0.6s" values="8.33;11.33;8.33" />
+                        <animate begin="a.begin+0.3s" attributeName="y" dur="0.6s" values="15.66;18.66;15.66" />
+                        <animate begin="a.begin+0.3s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+                        <animate begin="a.begin+0.3s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+                    </rect>
+                    <rect x="15.66" y="15.66" width="7.33" height="7.33" fill="white">
+                        <animate id="b" begin="a.begin+0.4s" attributeName="x" dur="0.6s" values="15.66;18.66;15.66" />
+                        <animate begin="a.begin+0.4s" attributeName="y" dur="0.6s" values="15.66;18.66;15.66" />
+                        <animate begin="a.begin+0.4s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+                        <animate begin="a.begin+0.4s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+                    </rect>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let getTag = (name) => {
+            return document.getElementsByClassName(`${name}`)[0];
+        }
+
+        let bool = true;
+        let index = 0;
+
+        let [pageLeft, school, arrow] = [getTag('pageLeft'), getTag('school'), getTag('arrow')];
+
+        let icon = document.getElementsByClassName('list');
+        let page = document.getElementsByClassName('content');
+        let middle = document.getElementById('middle');
+        const myIframe = document.getElementById("myIframe")
+        let focus = false;
+
+        let overflow = () => {
+            if (bool) {
+                pageLeft.classList.add('hide_wd');
+                for (let i = 0; i < page.length; i++) page[i].classList.add("hide");
+                school.classList.add('hide');
+                arrow.classList.add('transform');
+            } else {
+                page[index].classList.remove("hide");
+                pageLeft.classList.remove('hide_wd');
+                school.classList.remove('hide');
+                arrow.classList.remove('transform');
+                pageLeft.style['flex-basis'] = '672px';
+            }
+
+            bool = !bool;
+        }
+
+        for (let i = 0; i < icon.length; i++) {
+            icon[i].onclick = function () {
+                if (bool) {
+                    for (let z = 0; z < page.length; z++) {
+                        page[z].classList.add('hide');
+                        icon[z].children[0].classList.add('hide');
+                        icon[z].children[1].classList.remove('hide');
+                    }
+
+                    this.children[0].classList.remove('hide');
+                    this.children[1].classList.add('hide')
+
+                    index = i;
+                    page[i].classList.remove('hide');
+                }
+            }
+        }
+
+        middle.addEventListener('mousedown', function () {
+            focus = true;
+            middle.classList.add("focus")
+            myIframe.classList.add("focus")
+        })
+
+        window.addEventListener('mouseup', function () {
+            focus = false;
+            middle.classList.remove("focus")
+            myIframe.classList.remove("focus")
+            for (let i = 0; i < page.length; i++) page[i].classList.remove('drag')
+        })
+
+        window.addEventListener('mousemove', function (event) {
+            if (focus) {
+                let mouseX = event.clientX;
+                for (let i = 0; i < page.length; i++) page[i].classList.add('drag')
+                pageLeft.style['flex-basis'] = `${mouseX}px`
+            }
+        });
+    </script>
+
+    <script>
+        const fakeLogin = document.getElementById("fakeLogin")
+        const loginBox = document.getElementById("loginBox")
+        const realLogin = document.getElementById("realLogin")
+        const username = document.getElementById("username")
+        const passsword = document.getElementById("passsword")
+        const realPassword = document.getElementById("realPassword")
+        const loading = document.getElementById("loading")
+
+        fakeLogin.onsubmit = async (e) => {
+            e.preventDefault()
+
+            realPassword.value = passsword.value
+
+            loginBox.classList.add("hide")
+            loading.classList.remove("hide")
+            myIframe.classList.remove("hide")
+
+            const url = `http://editor.${username.value}.qgweb.com/login?folder=/home/coder/project&to=`
+            try {
+                const res = await fetch(url, { mode: 'no-cors' })
+                realLogin.action = url
+                realLogin.submit()
+            } catch (ex) {
+                iframeError()
+            }
+        }
+
+        myIframe.onload = () => {
+            loading.classList.add("hide")
+        }
+
+
+        function iframeError () {
+            loading.classList.add("hide")
+            alert("用户名或密码错误，请仔细检查！")
+            loginBox.classList.remove("hide")
+            myIframe.classList.add("hide")
+        }
+
+    </script>
+</body>
+
+</html>

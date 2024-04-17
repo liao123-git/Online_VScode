@@ -2,9 +2,9 @@
 ###
  # @Description: WASSUP
  # @Author: LDL <1923609016@qq.com>
- # @LastEditTime: 2024-04-12 22:04:48
+ # @LastEditTime: 2024-04-16 11:01:44
  # @Date: 2024-04-11 20:06:06
- # @FilePath: \Online_VScode\create-nginx.sh
+ # @FilePath: \Online_VScode\create_nginx.sh
 ### 
 
 # 指定 CSV 文件路径
@@ -31,6 +31,7 @@ fi
 
   echo ""
   echo "------------set $name's nginx conf--------------"
+    sudo docker restart nginx
     sudo docker exec -i nginx bash -c "echo 'server {
         listen 80;
         server_name '$domain';

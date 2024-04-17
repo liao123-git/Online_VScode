@@ -1,3 +1,5 @@
+#!/bin/bash
+
 name=""
 
 # 解析命令行参数
@@ -22,9 +24,11 @@ fi
   sudo rm -rf /editor/players/$name
   sudo rm -rf /editor/players/$name
   sudo rm -rf /editor/coredns/players/$name
+  sudo rm -rf ./$name.csv
   sudo docker rm -f ${name}_xampp
   sudo docker rm -f ${name}_editor
   sudo docker exec -i nginx rm -f /etc/nginx/conf.d/$name.conf
+  sudo chmod -R 777 /editor
 
   sudo echo "--------------------end clear $name------------------"
   sudo echo ""

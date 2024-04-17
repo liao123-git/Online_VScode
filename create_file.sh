@@ -1,10 +1,5 @@
-###
- # @Description: WASSUP
- # @Author: LDL <1923609016@qq.com>
- # @LastEditTime: 2024-04-14 19:24:07
- # @Date: 2024-04-14 18:33:32
- # @FilePath: \Online_VScode\create_file.sh
-### 
+#!/bin/bash
+
 sudo rm -rf /editor/players/*
 sudo mkdir -p /editor/players
 sudo rm -rf /editor/coredns/*

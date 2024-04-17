@@ -1,18 +1,5 @@
-# /usr/sh
-###
- # @Description: WASSUP
- # @Author: LDL <1923609016@qq.com>
- # @LastEditTime: 2024-04-14 18:42:18
- # @Date: 2024-04-14 18:39:11
- # @FilePath: \Online_VScode\clear-csv.sh
-### 
-###
- # @Description: WASSUP
- # @Author: LDL <1923609016@qq.com>
- # @LastEditTime: 2024-04-14 18:28:13
- # @Date: 2024-04-12 10:06:34
- # @FilePath: \Online_VScode\create-dns-csv.sh
-### 
+#!/bin/bash
+
 # 指定 CSV 文件路径
 csv_file="output.csv"
 
@@ -43,6 +30,6 @@ do
 
   name=${values[0]}
 
-  ./clear-single.sh -name $name
+  ./clear_single.sh -name $name
 
 done 3< "$csv_file"

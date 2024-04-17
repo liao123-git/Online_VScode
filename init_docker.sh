@@ -1,11 +1,5 @@
+#!/bin/bash
 ./create_file.sh
-###
- # @Description: WASSUP
- # @Author: LDL <1923609016@qq.com>
- # @LastEditTime: 2024-04-14 19:14:03
- # @Date: 2024-04-11 16:09:33
- # @FilePath: \Online_VScode\init-docker.sh
-### 
 
 echo ""
 echo "------------clear docker containers--------------"

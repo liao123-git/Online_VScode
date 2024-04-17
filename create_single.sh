@@ -2,20 +2,20 @@
 ###
  # @Description: WASSUP
  # @Author: LDL <1923609016@qq.com>
- # @LastEditTime: 2024-04-14 19:26:10
+ # @LastEditTime: 2024-04-16 18:33:39
  # @Date: 2024-04-12 21:37:10
  # @FilePath: \Online_VScode\create_single.sh
 ### 
 
 # 设置默认参数
 name=""
-ip="124.222.128.49"
+template="default"
 
 # 解析命令行参数
 while [[ "$#" -gt 0 ]]; do
   case $1 in
     -name) name="$2"; shift ;;
-    -ip) ip="$2"; shift ;;
+    -template) template="$2"; shift ;;
     *) echo "Unknown parameter passed: $1"; exit 1 ;;
   esac
   shift
@@ -34,8 +34,12 @@ editor="editor.${name}.qgweb.com"
 ./create_xampp.sh -name $name
 ./create_editor.sh -name $name -pass $password
 ./create_nginx.sh -name $name -domain $domain -editor $editor
-./create_dns.sh -name $name -domain $domain -editor $editor -ip $ip
+./create_dns.sh -name $name -domain $domain -editor $editor
 ./reset_dns.sh -path /editor/coredns/players
 ./install_extension.sh -name $name
+./set_template.sh -name $name -template $template
 
-echo "$name,$domain,$editor,$password"
+csv_file="$name.csv"
+echo "Name,Domain,Editor,Password" > "$csv_file"
+echo "$name,$domain,$editor,$password" >> "$csv_file"
+cat "$name.csv"

@@ -118,7 +118,7 @@ sudo docker run -d --name coredns -p 53:53/udp -v /editor/Corefile:/etc/coredns/
 ### coder
 ```sh
 # 清空
-sudo docker pull codercom/code-server:lastest
+sudo docker pull codercom/code-server:4.23.0
 sudo mkdir -p /test/players/player1/.config 
 sudo mkdir -p /test/players/player1/project 
 
@@ -128,7 +128,7 @@ sudo docker run -d -it --name test -p 8080:8080 \
   -v "/test/players/player1/project:/home/coder/project" \
   -u "$(id -u):$(id -g)" \
   -e "PASSWORD"=aDmin@hp15 \
-  codercom/code-server:latest
+  codercom/code-server:4.23.0
 
 # HTML CSS  
 # Image preview
