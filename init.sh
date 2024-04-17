@@ -1,4 +1,11 @@
 #!/bin/bash
+###
+ # @Description: WASSUP
+ # @Author: LDL <1923609016@qq.com>
+ # @LastEditTime: 2024-04-17 10:15:51
+ # @Date: 2024-04-11 16:07:50
+ # @FilePath: \Online_VScode\init.sh
+### 
 
 sudo cp /etc/resolv.conf /etc/resolv.conf.bak
 sudo sed -i 's/nameserver 127.0.0.53/nameserver 8.8.8.8/' /etc/resolv.conf
