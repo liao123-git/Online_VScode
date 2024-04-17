@@ -1,7 +1,7 @@
 <!--
  * @Description: WASSUP
  * @Author: LDL <1923609016@qq.com>
- * @LastEditTime: 2024-04-17 09:55:33
+ * @LastEditTime: 2024-04-17 09:56:47
  * @Date: 2024-04-10 20:30:48
  * @FilePath: \Online_VScode\README.md
 -->
@@ -14,40 +14,39 @@
     ```sh
         # 你脚本存放的目录
     chmod -R 777 /my_shell
-    ./init.sh
         # 如果镜像安装报错 重新执行
+    ./init.sh
     ```
-- 初始化
+- 设置IP
     ```sh
-        # 你脚本存放的目录
-    ./set_ip.sh -ip 192.168.7.215 -interface ensxx -gateway 192.168.7.254
         # num 人数 必填
         # ip 宿主机 IP 必填
         # interface 网卡名称 必填
         # gateway 网关 必填
+    ./set_ip.sh -ip 192.168.7.215 -interface ensxx -gateway 192.168.7.254
     ```
 - 创建一个比赛
   csv 会有选手的信息，运行完这个脚本会输出
     ```sh
-    ./create_game.sh -num 10 -prefix player -csv players_info -template default
         # num 人数 必填
         # prefix 用户名前缀
         # csv 输出 csv 文件名称 不需要带 .csv 后缀 默认 output
         # template 文件模板 默认空
+    ./create_game.sh -num 10 -prefix player -csv players_info -template default
     ```
 - 创建完比赛后能继续添加选手
   这个脚本添加的选手不会加到 csv 中，会在脚本目录下输出一个`$name.csv`
   ```sh
-    ./create_single.sh -name test -template default
         # name 用户名 必填
         # template 文件模板 默认空
+    ./create_single.sh -name test -template default
   ```
   - 保存项目成模板
   保存当前已有选手项目成模板，保存到`/editor/template/$name`
   ```sh
-    ./save_project.sh -name test -template test
         # name 用户名 必填
         # template 模板名 必填
+    ./save_project.sh -name test -template test
   ```
 - 后面跟着 -csv 的脚本 都是通过生成的 .csv 文件来创建服务
 - 没有跟的脚本都是独立的 可以独立创建某个服务 具体参数看脚本内
