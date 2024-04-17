@@ -19,7 +19,6 @@
     ```
 - 设置IP
     ```sh
-        # num 人数 必填
         # ip 宿主机 IP 必填
         # interface 网卡名称 必填
         # gateway 网关 必填
