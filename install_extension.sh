@@ -2,7 +2,7 @@
 ###
  # @Description: WASSUP
  # @Author: LDL <1923609016@qq.com>
- # @LastEditTime: 2024-04-17 13:53:39
+ # @LastEditTime: 2024-04-17 16:51:22
  # @Date: 2024-04-11 20:06:06
  # @FilePath: \Online_VScode\install_extension.sh
 ### 
@@ -40,7 +40,8 @@ echo "------------install $name's extension--------------"
         /usr/bin/code-server --install-extension tuxtina.json2yaml \
         /usr/bin/code-server --install-extension christian-kohler.path-intellisense \
         /usr/bin/code-server --install-extension xabikos.JavaScriptSnippets \
-        /usr/bin/code-server --install-extension streetsidesoftware.code-spell-checker
+        /usr/bin/code-server --install-extension streetsidesoftware.code-spell-checker \
+        /usr/bin/code-server --install-extension k--kato.intellij-idea-keybindings
     fi
     
     sudo docker exec -i ${name}_editor bash -c 'cat > /root/.local/share/code-server/Machine/settings.json' < ./settings.json
